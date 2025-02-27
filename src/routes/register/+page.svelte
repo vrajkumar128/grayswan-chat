@@ -4,21 +4,13 @@
     import { onMount } from "svelte";
 
     let email = $state("");
-    let user = $state(null);
-    let loading = $state(true);
 
     // Check if user is already logged in on component mount
     onMount(async () => {
         const { data } = await supabase.auth.getSession();
-
         if (data.session) {
             goto("/chat");
-            return;
         }
-
-        // Set user data
-        user = data.session.user;
-        loading = false;
     });
 
     async function loginWithGoogle() {
@@ -75,8 +67,8 @@
 
 <div class="grid h-[100vh] w-full place-items-center bg-[#101828] px-5 py-16">
     <div class="max-w-md w-full">
-        <h1 class="text-3xl font-semibold mb-4 text-white font-onest">Welcome back</h1>
-        <p class="text-gray-400 mb-6 font-onest">
+        <h1 class="text-3xl font-semibold mb-4 text-white">Welcome back</h1>
+        <p class="text-gray-400 mb-6">
             Sign in with an existing provider, or we'll send you a link to your
             email.
         </p>
@@ -85,7 +77,7 @@
             onclick={loginWithGoogle}
             class="flex items-center justify-center w-full py-3 px-4 mb-3 rounded bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition-colors"
         >
-            <span class="w-5 h-5 mr-3 flex items-center justify-center"><img src="https://supabase.com/dashboard/img/icons/google-icon.svg" alt="Google logo" width="20" height="20" /></span>
+            <span class="w-5 h-5 mr-3 flex items-center justify-center">G</span>
             Continue with Google
         </button>
 
@@ -93,7 +85,7 @@
             onclick={loginWithDiscord}
             class="flex items-center justify-center w-full py-3 px-4 mb-3 rounded bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition-colors"
         >
-            <span class="w-5 h-5 mr-3 flex items-center justify-center"><img src="https://supabase.com/dashboard/img/icons/discord-icon.svg" alt="Discord logo" width="20" height="20" /></span>
+            <span class="w-5 h-5 mr-3 flex items-center justify-center">D</span>
             Continue with Discord
         </button>
 
@@ -101,7 +93,7 @@
             onclick={loginWithGitHub}
             class="flex items-center justify-center w-full py-3 px-4 mb-3 rounded bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition-colors"
         >
-            <span class="w-5 h-5 mr-3 flex items-center justify-center"><img src="https://supabase.com/dashboard/img/icons/github-icon.svg" alt="GitHub logo" width="20" height="20" /></span>
+            <span class="w-5 h-5 mr-3 flex items-center justify-center">H</span>
             Continue with GitHub
         </button>
 
@@ -131,25 +123,25 @@
         <div class="mt-6 text-xs text-gray-400 leading-relaxed">
             <p>
                 By continuing, you agree to our <a
-                    href="https://www.grayswan.ai/terms-of-service"
+                    href="/terms"
                     class="text-white hover:underline">Terms of Service</a
                 >, and acknowledge that you have reviewed our
-                <a href="https://www.grayswan.ai/privacy-policy" class="text-white hover:underline">Privacy</a
+                <a href="/privacy" class="text-white hover:underline">Privacy</a
                 >
                 and
-                <a href="https://www.grayswan.ai/acceptable-use-policy" class="text-white hover:underline"
+                <a href="/acceptable-use" class="text-white hover:underline"
                     >Acceptable Use</a
                 > policies.
             </p>
         </div>
 
-        <!-- <div class="mt-6 text-center text-gray-400 text-sm">
+        <div class="mt-6 text-center text-gray-400 text-sm">
             <p>
                 Don't have an account? <a
                     href="/signup"
                     class="text-white hover:underline">Sign Up</a
                 >
             </p>
-        </div> -->
+        </div>
     </div>
 </div>

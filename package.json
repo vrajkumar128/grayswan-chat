@@ -25,6 +25,7 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"dotenv": "^16.4.7",
 		"supabase": "^2.15.8",
+		"supabase-cli": "^0.0.21",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0"
 	}
