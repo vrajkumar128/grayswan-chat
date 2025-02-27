@@ -128,7 +128,7 @@
             Continue with email
         </button>
 
-        <div class="mt-6 text-xs text-gray-400 leading-relaxed">
+        <div class="mt-6 text-xs text-gray-400 leading-relaxed font-onest">
             <p>
                 By continuing, you agree to our <a
                     href="https://www.grayswan.ai/terms-of-service"

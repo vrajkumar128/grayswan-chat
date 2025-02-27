@@ -13,15 +13,14 @@
         // Check if user is logged in
         const { data } = await supabase.auth.getSession();
 
-        // Set user data
-        user = data.session.user;
-        loading = false;
-
-        // Redirect to chat page if already logged in
+        // Set user data if session exists
         if (data.session) {
+            user = data.session.user;
+            // Redirect to chat page if already logged in
             goto('/chat');
-            return;
         }
+        
+        loading = false;
     });
     
     async function signOut() {
