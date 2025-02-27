@@ -1,26 +1,25 @@
 <script>
     import "../app.css";
-	let { data, children } = $props();
+    let { data, children } = $props();
 </script>
 
-<head>
-    <link
-      rel="preload"
-      href="/fonts/Onest-VariableFont_wght.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-</head>
+<svelte:head>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" 
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+</svelte:head>
+
 <header class="fixed left-0 top-0 w-full">
   <div class="p-5 md:p-8">
-    <a href="https://www.grayswan.ai" class="inline-block w-48 md:w-auto text-white"
-      ><svg
+    <a href="https://www.grayswan.ai" class="inline-block w-48 md:w-auto text-white">
+      <svg
         class="w-full max-w-[227px]"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 227 32"
         fill="none"
-        ><path
+      ><path
           d="M212.229 5.86768H207.243V26.1324H210.708V9.22938L222.042 26.1324H227V5.86768H223.563V22.7427L212.229 5.86768Z"
           fill="currentColor"
         ></path><path
@@ -56,11 +55,10 @@
         ></path><path
           d="M27.9766 4.30458C27.9938 4.07538 28.0882 3.86104 28.4561 3.94864L30.5645 4.86321C30.7503 4.94807 30.812 5.09195 30.7979 5.27044C30.4324 9.52979 29.6903 13.6008 27.9378 17.531L27.3727 18.6602C27.3459 18.7175 27.3068 18.7683 27.2584 18.809C27.2099 18.8497 27.1532 18.8794 27.0921 18.896C27.032 18.9137 26.9686 18.9175 26.9068 18.907C26.845 18.8965 26.7864 18.8721 26.7355 18.8356C20.8091 15.0025 18.953 11.5802 18.6285 6.40469C18.5843 5.70045 18.6462 4.68458 19.5872 4.68458C20.4114 4.68458 20.6053 5.50463 20.6935 6.22352C21.2554 10.8022 22.6552 12.8104 25.8891 15.251C27.0768 11.9518 27.5711 8.70089 27.8989 5.23505C27.953 4.6629 27.9714 4.3898 27.9766 4.30458Z"
           fill="currentColor"
-        ></path></svg
-      ><!----> <span class="sr-only">Gray Swan AI Homepage</span></a
-    >
+        ></path></svg>
+      <span class="sr-only">Gray Swan AI Homepage</span>
+    </a>
   </div>
 </header>
-
 
 {@render children()}
