@@ -9,7 +9,6 @@ const config = {
 		adapter: adapter()
 	},
 
-	// Enable Svelte 5 runes mode
 	compilerOptions: {
 		runes: true
 	}
