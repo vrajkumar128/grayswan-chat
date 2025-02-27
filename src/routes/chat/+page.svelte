@@ -23,30 +23,12 @@
     
     async function signOut() {
         await supabase.auth.signOut();
+        user = null;
         goto('/login');
     }
 </script>
 
-<div class="min-h-screen bg-[#101828] text-white p-4">
-    <header class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-        <h1 class="text-2xl font-bold">Chat Room</h1>
-        
-        {#if user}
-        <div class="flex items-center gap-4">
-            <div class="text-sm">
-                <span class="block text-gray-400">Signed in as</span>
-                <span class="font-medium">{user.email}</span>
-            </div>
-            <button 
-                onclick={signOut}
-                class="bg-gray-900 hover:bg-gray-800 px-4 py-2 rounded text-sm"
-            >
-                Sign Out
-            </button>
-        </div>
-        {/if}
-    </header>
-    
+<div class="min-h-screen bg-[#101828] text-white p-4">    
     {#if loading}
         <div class="flex justify-center items-center h-[calc(100vh-100px)]">
             <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
