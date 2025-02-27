@@ -10,8 +10,8 @@
         // Check if user is logged in
         const { data } = await supabase.auth.getSession();
         
+        // Not logged in, redirect to login page
         if (!data.session) {
-            // Not logged in, redirect to login page
             goto('/login');
             return;
         }
@@ -19,13 +19,9 @@
         // Set user data
         user = data.session.user;
         loading = false;
+
+        console.log(data.session.user);
     });
-    
-    async function signOut() {
-        await supabase.auth.signOut();
-        user = null;
-        goto('/login');
-    }
 </script>
 
 <div class="min-h-screen bg-[#101828] text-white p-4">    
@@ -34,10 +30,9 @@
             <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
         </div>
     {:else}
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto mt-8 pt-8">
             <div class="bg-gray-900 rounded-lg p-4 h-[calc(100vh-200px)] flex flex-col">
                 <div class="flex-1 overflow-y-auto mb-4 p-2">
-                    <!-- Chat messages will go here -->
                     <p class="text-center text-gray-400 my-8">Your messages will appear here</p>
                 </div>
                 

@@ -4,17 +4,24 @@
     import { supabase } from "$lib/supabase";
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
-    
+  
+    let subscription = $state(null);
     let user = $state(null);
     let loading = $state(true);
     
     onMount(async () => {
         // Check if user is logged in
         const { data } = await supabase.auth.getSession();
-        
+
         // Set user data
         user = data.session.user;
         loading = false;
+
+        // Redirect to chat page if already logged in
+        if (data.session) {
+            goto('/chat');
+            return;
+        }
     });
     
     async function signOut() {
@@ -33,7 +40,7 @@
 </svelte:head>
 
 <div class="min-h-screen bg-[#0f1218]">
-  <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+  <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center mb-8 pb-8">
     <div class="p-5 md:p-8">
       <a href="https://www.grayswan.ai" class="inline-block w-48 md:w-auto text-white pointer-events-auto">
         <svg
@@ -83,13 +90,13 @@
     </div>
         {#if user}
         <div class="flex items-center gap-4">
-            <div class="text-sm">
+            <div class="text-sm pb-4">
                 <span class="block text-gray-400">Signed in as</span>
-                <span class="font-medium">{user.email}</span>
+                <span class="font-medium text-white">{user.email}</span>
             </div>
             <button 
                 onclick={signOut}
-                class="bg-gray-900 hover:bg-gray-800 px-4 py-2 rounded text-sm"
+                class="bg-gray-900 hover:bg-gray-800 px-4 py-2 rounded text-sm text-white mr-4 mb-4"
             >
                 Sign Out
             </button>
