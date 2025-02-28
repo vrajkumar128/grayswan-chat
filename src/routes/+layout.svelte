@@ -41,7 +41,7 @@
 <div class="min-h-screen bg-[#0f1218]">
   <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center">
     <div class="p-5 md:p-8">
-      <a href="https://www.grayswan.ai" class="inline-block w-48 md:w-auto text-white pointer-events-auto">
+      <a href="https://grayswan-chat.vercel.app/" class="inline-block w-48 md:w-auto text-white pointer-events-auto">
         <svg
           class="w-full max-w-[227px] pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
