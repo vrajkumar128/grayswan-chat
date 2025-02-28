@@ -4,10 +4,13 @@
     import { supabase } from "$lib/supabase";
     import { goto } from '$app/navigation';
     import { page } from '$app/state';
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
   
     let user = $state(null);
     let loading = $state(true);
+    let menuOpen = $state(false);
+    let menuButtonRef;
+    let menuDropdownRef;
     
     onMount(async () => {
         // Check if user is logged in
@@ -21,12 +24,40 @@
         }
         
         loading = false;
+        
+        // Add click listener to close menu when clicking outside
+        if (typeof window !== 'undefined') {
+            window.addEventListener('click', handleClickOutside);
+        }
     });
+    
+    // Clean up the event listener when component is destroyed
+    onDestroy(() => {
+        if (typeof window !== 'undefined') {
+            window.removeEventListener('click', handleClickOutside);
+        }
+    });
+    
+    // Close menu when clicking outside of it
+    function handleClickOutside(event) {
+        if (menuOpen && 
+            menuButtonRef && 
+            menuDropdownRef && 
+            !menuButtonRef.contains(event.target) && 
+            !menuDropdownRef.contains(event.target)) {
+            menuOpen = false;
+        }
+    }
     
     async function signOut() {
         await supabase.auth.signOut();
         user = null;
         goto('/login');
+    }
+
+    function toggleMenu(event) {
+        event.stopPropagation();
+        menuOpen = !menuOpen;
     }
 </script>
 
@@ -38,12 +69,12 @@
   />
 </svelte:head>
 
-<div class="min-h-screen bg-[#0f1218]">
-  <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center">
-    <div class="p-5 md:p-8">
-      <a href="https://grayswan-chat.vercel.app/" class="inline-block w-48 md:w-auto text-white pointer-events-auto">
+<div class="min-h-screen bg-[#101828] pt-16">
+  <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center h-16">
+    <div class="px-5 md:px-8 flex items-center h-full">
+      <a href="/" class="inline-block w-44 md:w-auto text-white pointer-events-auto">
         <svg
-          class="w-full max-w-[227px] pointer-events-none"
+          class="w-full max-w-[200px] pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 227 32"
           fill="none"
@@ -87,20 +118,56 @@
         <span class="sr-only">Gray Swan AI Homepage</span>
       </a>
     </div>
-        {#if page.route.id === '/chat' && user}
-        <div class="flex items-center gap-4">
-            <div class="hidden md:block text-sm pb-4">
-                <span class="block text-gray-400">Signed in as</span>
-                <span class="font-medium text-white">{user.email}</span>
+    
+    {#if page.route.id === '/chat' && user}
+      <!-- Desktop view -->
+      <div class="hidden md:flex items-center gap-4 mr-8">
+        <div class="text-sm">
+            <span class="block text-gray-400">Signed in as</span>
+            <span class="font-medium text-white">{user.email}</span>
+        </div>
+        <button 
+            onclick={signOut}
+            class="bg-gray-900 hover:bg-gray-800 px-4 py-2 rounded text-sm text-white"
+        >
+            Sign Out
+        </button>
+      </div>
+      
+      <!-- Mobile view -->
+      <div class="md:hidden relative mr-5 flex items-center h-full">
+        <button 
+          bind:this={menuButtonRef}
+          onclick={toggleMenu}
+          class="text-white p-2 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <!-- Hamburger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
+        
+        <!-- Dropdown menu -->
+        {#if menuOpen}
+          <div 
+            bind:this={menuDropdownRef}
+            class="absolute right-0 top-14 w-48 py-2 bg-gray-900 rounded-md shadow-xl z-10"
+          >
+            <div class="px-4 py-2 border-b border-gray-800">
+              <p class="text-xs text-gray-400">Signed in as</p>
+              <p class="text-sm font-medium text-white truncate">{user.email}</p>
             </div>
             <button 
-                onclick={signOut}
-                class="bg-gray-900 hover:bg-gray-800 px-4 py-2 rounded text-sm text-white mr-4 mb-4"
+              onclick={signOut}
+              class="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800"
             >
-                Sign Out
+              Sign Out
             </button>
-        </div>
+          </div>
         {/if}
+      </div>
+    {/if}
   </header>
   
   <div>
