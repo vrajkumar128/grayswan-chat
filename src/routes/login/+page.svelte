@@ -73,6 +73,10 @@
     }
 </script>
 
+<svelte:head>
+  <title>Login - Gray Swan Chat</title>
+</svelte:head>
+
 <div class="grid h-[100vh] w-full place-items-center bg-[#101828] px-5 py-16">
     <div class="max-w-md w-full">
         <h1 class="text-3xl font-semibold mb-4 text-white font-onest">Welcome back</h1>
