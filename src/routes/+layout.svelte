@@ -15,8 +15,8 @@
         // Set user data if session exists
         if (data.session) {
             user = data.session.user;
-            // Redirect to chat page if already logged in
-            goto('/chat');
+            // // Redirect to chat page if already logged in
+            // goto('/chat');
         }
         
         loading = false;
