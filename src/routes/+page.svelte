@@ -2,8 +2,6 @@
     import { supabase } from "$lib/supabase";
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
-    
-    let loading = $state(true);
 
     onMount(async () => {
         const { data } = await supabase.auth.getSession();

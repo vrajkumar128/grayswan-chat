@@ -5,7 +5,6 @@
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
   
-    let subscription = $state(null);
     let user = $state(null);
     let loading = $state(true);
     

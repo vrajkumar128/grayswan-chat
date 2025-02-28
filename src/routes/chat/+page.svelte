@@ -35,9 +35,6 @@
         
         // Scroll to bottom of messages on initial load
         scrollToBottom();
-        
-        // Log connection status for debugging
-        console.log('Realtime connection status:', supabase.realtime.connectionState);
     });
     
     // Clean up subscription when component is destroyed
@@ -109,12 +106,12 @@
                         {#each $messages as message (message.id)}
                             <div class={`flex ${message.user_id === user?.id ? 'justify-end' : 'justify-start'}`}>
                                 <div class={`max-w-[80%] rounded-lg p-3 ${
-                                    message.user_id === user?.id 
+                                    message.user_id === user?.id // Check if a message belongs to the current user
                                         ? 'bg-blue-600 text-white' 
                                         : 'bg-gray-800 text-gray-100'
                                 }`}>
                                     <p class="text-xs font-bold mb-1">
-                                        {message.username || (message.user_id ? message.user_id.substring(0, 8) : 'unknown')}
+                                        {message.username}
                                     </p>
                                     <p class="break-words">{message.text}</p>
                                     <p class="text-xs opacity-70 mt-1 text-right">{formatTimestamp(message.timestamp)}</p>
