@@ -3,6 +3,7 @@
     let { data, children } = $props();
     import { supabase } from "$lib/supabase";
     import { goto } from '$app/navigation';
+    import { page } from '$app/state';
     import { onMount } from 'svelte';
   
     let user = $state(null);
@@ -38,7 +39,7 @@
 </svelte:head>
 
 <div class="min-h-screen bg-[#0f1218]">
-  <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center mb-8 pb-8">
+  <header class="fixed left-0 top-0 w-full z-30 flex justify-between items-center">
     <div class="p-5 md:p-8">
       <a href="https://www.grayswan.ai" class="inline-block w-48 md:w-auto text-white pointer-events-auto">
         <svg
@@ -86,7 +87,7 @@
         <span class="sr-only">Gray Swan AI Homepage</span>
       </a>
     </div>
-        {#if user}
+        {#if page.route.id === '/chat' && user}
         <div class="flex items-center gap-4">
             <div class="hidden md:block text-sm pb-4">
                 <span class="block text-gray-400">Signed in as</span>
