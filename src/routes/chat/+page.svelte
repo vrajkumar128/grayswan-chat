@@ -88,6 +88,10 @@
     });
 </script>
 
+<svelte:head>
+  <title>Chat - Gray Swan Chat</title>
+</svelte:head>
+
 <div class="flex flex-col min-h-screen bg-[#101828] text-white">    
     {#if loading}
         <div class="flex justify-center items-center h-[calc(100vh-100px)]">

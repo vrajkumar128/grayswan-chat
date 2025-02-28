@@ -2,6 +2,10 @@
     import { page } from '$app/state';
 </script>
 
+<svelte:head>
+  <title>404 - Gray Swan Chat</title>
+</svelte:head>
+
 {#if page.status === 404}
 <div class="grid h-screen w-full place-items-center bg-[#101828] px-5 py-16 text-white">
     <div class="max-w-md w-full text-center">
