@@ -88,17 +88,17 @@
     });
 </script>
 
-<div class="min-h-screen bg-[#101828] text-white p-4">    
+<div class="flex flex-col min-h-screen bg-[#101828] text-white">    
     {#if loading}
         <div class="flex justify-center items-center h-[calc(100vh-100px)]">
             <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
         </div>
     {:else}
-        <div class="max-w-4xl mx-auto mt-8 pt-8">
-            <div class="bg-gray-900 rounded-lg p-4 h-[calc(100vh-200px)] flex flex-col">
+        <div class="flex flex-col h-screen pt-20 pb-4 px-4">
+            <div class="bg-gray-900 rounded-lg flex flex-col h-full max-w-4xl mx-auto w-full">
                 <div 
                     bind:this={messagesContainer}
-                    class="flex-1 overflow-y-auto mb-4 p-2 space-y-4"
+                    class="flex-1 overflow-y-auto p-4 space-y-4"
                 >
                     {#if $messages.length === 0}
                         <p class="text-center text-gray-400 my-8">No messages yet. Start the conversation!</p>
@@ -121,7 +121,7 @@
                     {/if}
                 </div>
                 
-                <div class="border-t border-gray-800 pt-4">
+                <div class="border-t border-gray-800 p-4 mt-auto">
                     <form class="flex gap-2" onsubmit={handleSendMessage}>
                         <input 
                             type="text" 
