@@ -89,7 +89,7 @@
     </div>
         {#if user}
         <div class="flex items-center gap-4">
-            <div class="text-sm pb-4">
+            <div class="hidden md:block text-sm pb-4">
                 <span class="block text-gray-400">Signed in as</span>
                 <span class="font-medium text-white">{user.email}</span>
             </div>
