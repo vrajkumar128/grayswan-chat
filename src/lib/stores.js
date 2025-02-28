@@ -31,7 +31,7 @@ export async function sendMessage(userId, text, email) {
             user_id: userId,
             text: text.trim(),
             timestamp: new Date().toISOString(),
-            username: email ? email.split('@')[0] : 'anonymous' // Define username as everything that comes before the @ in a user's email address
+            username: email.split('@')[0] // Define username as everything that comes before the @ in a user's email address
         };
 
         // Insert message into Supabase
@@ -54,46 +54,24 @@ export async function sendMessage(userId, text, email) {
 
 // Subscribe to real-time changes
 export function subscribeToMessages() {
-    console.log('Setting up real-time subscription...');
-
-    const channel = supabase
+    const subscription = supabase
         .channel('public:messages')
         .on('postgres_changes',
             {
-                event: '*', // Listen for all events (INSERT, UPDATE, DELETE)
+                event: 'INSERT',
                 schema: 'public',
                 table: 'messages'
             },
             (payload) => {
-                console.log('Real-time message received:', payload);
-
-                // Reload all messages to ensure consistency
-                if (payload.eventType === 'INSERT') {
-                    messages.update(currentMessages => {
-                        // Check if message already exists to avoid duplicates
-                        const messageExists = currentMessages.some(msg => msg.id === payload.new.id);
-
-                        if (!messageExists) {
-                            return [...currentMessages, payload.new];
-                        }
-
-                        return currentMessages;
-                    });
-                } else {
-                    // For other event types or to ensure full sync, reload all messages
-                    loadMessages();
-                }
+                messages.update(currentMessages => {
+                    return [...currentMessages, payload.new];
+                });
             }
         )
-        .subscribe((status) => {
-            console.log('Subscription status:', status);
-            if (status !== 'SUBSCRIBED') {
-                console.warn('Subscription status is not SUBSCRIBED:', status);
-            }
-        });
+        .subscribe();
 
+    // Return unsubscribe function
     return () => {
-        console.log('Unsubscribing from real-time updates');
-        supabase.removeChannel(channel);
+        supabase.removeChannel(subscription);
     };
 }
