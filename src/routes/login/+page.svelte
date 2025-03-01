@@ -17,7 +17,7 @@
         }
 
         // Set user data
-        user = data.session.user;
+        user = data.session?.user;
         loading = false;
     });
 
@@ -42,7 +42,7 @@
         if (error) console.error(error.message);
     }
 
-        async function loginWithGitHub() {
+    async function loginWithGitHub() {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "github",
             options: {
@@ -77,8 +77,8 @@
   <title>Login - Gray Swan Chat</title>
 </svelte:head>
 
-<div class="grid h-screen w-full place-items-center bg-[#101828] px-5 py-16">
-    <div class="max-w-md w-full">
+<div class="flex flex-col justify-center min-h-screen bg-[#101828] px-5 py-8">
+    <div class="max-w-md w-full mx-auto">
         <h1 class="text-3xl font-semibold mb-4 text-white font-onest">Welcome back</h1>
         <p class="text-gray-400 mb-6 font-onest">
             Sign in with an existing provider, or we'll send you a link to your
@@ -146,14 +146,5 @@
                 > policies.
             </p>
         </div>
-
-        <!-- <div class="mt-6 text-center text-gray-400 text-sm">
-            <p>
-                Don't have an account? <a
-                    href="/signup"
-                    class="text-white hover:underline">Sign Up</a
-                >
-            </p>
-        </div> -->
     </div>
 </div>

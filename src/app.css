@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    min-height: 100vh;
-    margin: 0;
-}
-
 /* Chromium */
 ::-webkit-scrollbar {
     width: 4px;
