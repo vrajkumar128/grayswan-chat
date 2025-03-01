@@ -76,7 +76,7 @@
 
 <div class="flex flex-col min-h-screen bg-[#101828]">
     <header
-        class="fixed left-0 top-0 w-full z-30 flex justify-between items-center h-12"
+        class="fixed left-0 top-0 w-full z-30 flex justify-between items-center h-12 md:h-16"
     >
         <div class="px-5 md:px-8 flex items-center h-full">
             {#if page.route.id === "/chat" && user}
