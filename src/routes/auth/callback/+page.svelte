@@ -54,7 +54,7 @@
     });
 </script>
 
-<div class="grid h-[100vh] w-full place-items-center bg-[#101828] px-5 py-16">
+<div class="grid h-screen w-full place-items-center bg-[#101828] px-5 py-16">
     <div class="max-w-md w-full text-center">
         {#if loading}
             <h1 class="text-3xl font-semibold mb-4 text-white">

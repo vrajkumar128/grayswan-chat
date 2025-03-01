@@ -19,7 +19,7 @@
   <title>Home - Gray Swan Chat</title>
 </svelte:head>
 
-<div class="flex h-full w-full items-center justify-center bg-[#101828] text-white">
+<div class="flex h-screen w-full items-center justify-center bg-[#101828] text-white">
     <div class="text-center">
         <h1 class="text-2xl font-semibold mb-4">Welcome</h1>
         <div class="flex justify-center">
