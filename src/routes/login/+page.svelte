@@ -115,22 +115,26 @@
             <div class="flex-1 h-px bg-gray-800"></div>
         </div>
 
-        <div class="mb-3">
-            <input
-                type="email"
-                placeholder="example@email.com"
-                value={email}
-                oninput={updateEmail}
-                class="w-full py-3.5 px-4 rounded bg-gray-900 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-700"
-            />
-        </div>
+        
+        <form onsubmit={loginWithEmail}>
+            <div class="mb-3">
+                <input
+                    type="email"
+                    placeholder="example@email.com"
+                    value={email}
+                    oninput={updateEmail}
+                    required
+                    class="w-full py-3.5 px-4 rounded bg-gray-900 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-700"
+                />
+            </div>
 
-        <button
-            onclick={loginWithEmail}
-            class="w-full py-3.5 px-4 rounded bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition-colors"
-        >
-            Continue with email
-        </button>
+            <button
+                type="submit"
+                class="w-full py-3.5 px-4 rounded bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition-colors"
+            >
+                Continue with email
+            </button>
+        </form>
 
         <div class="mt-6 text-xs text-gray-400 leading-relaxed font-onest">
             <p>
